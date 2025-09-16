@@ -22,16 +22,6 @@ namespace pyrLunaAgendaContactosGUI
 
         private void frmListaDeContactos_Load(object sender, EventArgs e)
         {
-            vecNombres[0] = "Max Verstappen";
-            vecNumeros[0] = "123456789";
-            vecNombres[1] = "Lewis Hamilton";
-            vecNumeros[1] = "987654321";
-            vecNombres[2] = "Lando Norris";
-            vecNumeros[2] = "456123789";
-            vecNombres[3] = "Fernando Alonso";
-            vecNumeros[3] = "789456123";
-            vecNombres[4] = "Franco Colapinto";
-            vecNumeros[4] = "321654987";
             lblNombre.Text = vecNombres[0];
             lblNumero.Text = vecNumeros[0];
             btnAnterior.Enabled = false;
@@ -47,7 +37,7 @@ namespace pyrLunaAgendaContactosGUI
                 lblNumero.Text = vecNumeros[indice];
                 btnAnterior.Enabled = true;
             }
-            if (vecNombres[indice + 1] == null)
+            if (vecNombres[indice + 2] == null)
             {
                 btnSiguiente.Enabled = false;
             }
