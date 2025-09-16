@@ -159,6 +159,7 @@
             Controls.Add(txtNombre);
             Controls.Add(lblNumero);
             Controls.Add(lblNombre);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmAgendar";
             StartPosition = FormStartPosition.CenterScreen;

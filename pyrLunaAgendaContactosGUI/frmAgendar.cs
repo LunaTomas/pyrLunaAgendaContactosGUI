@@ -19,11 +19,29 @@ namespace pyrLunaAgendaContactosGUI
         }
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
-            mskNumero.Enabled = true;
+            //activar el maskedtextbox cuando el textbox tenga al menos 1 caracter
+            if (txtNombre.Text.Length > 0)
+            {
+                mskNumero.Enabled = true;
+            }
+            else
+            {
+                mskNumero.Enabled = false;
+                btnAgendar.Enabled = false;
+                mskNumero.Clear();
+            }
         }
         private void mskNumero_TextChanged(object sender, EventArgs e)
         {
-            btnAgendar.Enabled = true;
+            //activar el boton agendar cuando el maskedtextbox tenga minimo 1 numero
+            if (mskNumero.Text.Length == 13)
+            {
+                btnAgendar.Enabled = true;
+            }
+            else
+            {
+                btnAgendar.Enabled = false;
+            }
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {

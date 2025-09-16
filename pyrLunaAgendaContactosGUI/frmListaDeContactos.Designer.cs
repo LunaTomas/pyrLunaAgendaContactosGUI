@@ -85,6 +85,7 @@
             Controls.Add(btnSiguiente);
             Controls.Add(btnAnterior);
             Controls.Add(lblNombre);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "frmListaDeContactos";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Lista de Contactos";
