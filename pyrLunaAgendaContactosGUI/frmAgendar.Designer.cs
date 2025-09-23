@@ -39,6 +39,7 @@
             btnVerListaDeContactos = new Button();
             lblCantidadContactos = new Label();
             lblFechaYHora = new Label();
+            btnEliminar = new Button();
             SuspendLayout();
             // 
             // lblNombre
@@ -86,7 +87,7 @@
             lstRegistro.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lstRegistro.FormattingEnabled = true;
             lstRegistro.ItemHeight = 17;
-            lstRegistro.Location = new Point(19, 132);
+            lstRegistro.Location = new Point(19, 192);
             lstRegistro.Name = "lstRegistro";
             lstRegistro.Size = new Size(418, 140);
             lstRegistro.TabIndex = 7;
@@ -116,7 +117,7 @@
             // btnVerListaDeContactos
             // 
             btnVerListaDeContactos.Font = new Font("Segoe UI", 14.25F);
-            btnVerListaDeContactos.Location = new Point(19, 342);
+            btnVerListaDeContactos.Location = new Point(12, 388);
             btnVerListaDeContactos.Name = "btnVerListaDeContactos";
             btnVerListaDeContactos.Size = new Size(418, 33);
             btnVerListaDeContactos.TabIndex = 4;
@@ -128,7 +129,7 @@
             // 
             lblCantidadContactos.AutoSize = true;
             lblCantidadContactos.Font = new Font("Segoe UI", 14.25F);
-            lblCantidadContactos.Location = new Point(19, 289);
+            lblCantidadContactos.Location = new Point(12, 335);
             lblCantidadContactos.Name = "lblCantidadContactos";
             lblCantidadContactos.Size = new Size(20, 25);
             lblCantidadContactos.TabIndex = 8;
@@ -138,17 +139,29 @@
             // 
             lblFechaYHora.AutoSize = true;
             lblFechaYHora.Font = new Font("Segoe UI", 14.25F);
-            lblFechaYHora.Location = new Point(19, 314);
+            lblFechaYHora.Location = new Point(12, 360);
             lblFechaYHora.Name = "lblFechaYHora";
             lblFechaYHora.Size = new Size(20, 25);
             lblFechaYHora.TabIndex = 9;
             lblFechaYHora.Text = "-";
             // 
+            // btnEliminar
+            // 
+            btnEliminar.Font = new Font("Segoe UI", 14.25F);
+            btnEliminar.Location = new Point(231, 133);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(206, 33);
+            btnEliminar.TabIndex = 10;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
+            // 
             // frmAgendar
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(456, 391);
+            ClientSize = new Size(456, 424);
+            Controls.Add(btnEliminar);
             Controls.Add(lblFechaYHora);
             Controls.Add(lblCantidadContactos);
             Controls.Add(btnVerListaDeContactos);
@@ -181,5 +194,6 @@
         private Button btnVerListaDeContactos;
         private Label lblCantidadContactos;
         private Label lblFechaYHora;
+        private Button btnEliminar;
     }
 }

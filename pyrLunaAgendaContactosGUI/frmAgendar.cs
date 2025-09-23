@@ -93,5 +93,41 @@ namespace pyrLunaAgendaContactosGUI
             frmListaDeContactos.vecNumeros = vecNumeros;
             frmListaDeContactos.ShowDialog();
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (lstRegistro.SelectedIndex != -1)
+            {
+                int indiceSeleccionado = lstRegistro.SelectedIndex;
+                lstRegistro.Items.RemoveAt(indiceSeleccionado);
+                for (int i = indiceSeleccionado; i < vecNombres.Length - 1; i++)
+                {
+                    vecNombres[i] = vecNombres[i + 1];
+                    vecNumeros[i] = vecNumeros[i + 1];
+                }
+                vecNombres[vecNombres.Length - 1] = null;
+                vecNumeros[vecNumeros.Length - 1] = null;
+                indice--;
+                lblCantidadContactos.Text = "Cantidad de contactos: " + lstRegistro.Items.Count;
+                if (lstRegistro.Items.Count == 0)
+                {
+                    txtNombre.Enabled = true;
+                    mskNumero.Enabled = true;
+                    btnAgendar.Enabled = true;
+                }
+                if (lstRegistro.Items.Count > 0)
+                {
+                    lblFechaYHora.Text = "Último registro: " + DateTime.Now.ToString();
+                }
+                else
+                {
+                    lblFechaYHora.Text = "Último registro: Ninguno";
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione un contacto para eliminar.", "No se ha seleccionado contacto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }
