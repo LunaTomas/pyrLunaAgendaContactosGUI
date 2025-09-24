@@ -5,6 +5,7 @@ namespace pyrLunaAgendaContactosGUI
         public string[] vecNombres = new string[7];
         public string[] vecNumeros = new string[7];
         int indice = 0;
+        int contador = 0;
         public frmAgendar()
         {
             InitializeComponent();
@@ -26,9 +27,11 @@ namespace pyrLunaAgendaContactosGUI
             {
                 lstRegistro.Items.Add(vecNombres[indice] + " - " + vecNumeros[indice]);
                 indice++;
+                contador ++;
             }
-            lblCantidadContactos.Text = "Cantidad de contactos: 0";
-            lblFechaYHora.Text = "Ultimo registro: Ninguno";
+            lblCantidadContactos.Text = "Cantidad de contactos: " + contador;
+            //lblCantidadContactos.Text = "Cantidad de contactos: 0";
+            //lblFechaYHora.Text = "Ultimo registro: Ninguno";
             mskNumero.Enabled = false;
             btnAgendar.Enabled = false;
             txtNombre.Focus();
