@@ -12,33 +12,56 @@ namespace pyrLunaAgendaContactosGUI
         }
         private void frmAgendar_Load(object sender, EventArgs e)
         {
-            vecNombres[0] = "Max Verstappen";
-            vecNumeros[0] = "123456789";
-            vecNombres[1] = "Lewis Hamilton";
-            vecNumeros[1] = "987654321";
-            vecNombres[2] = "Lando Norris";
-            vecNumeros[2] = "456123789";
-            vecNombres[3] = "Fernando Alonso";
-            vecNumeros[3] = "789456123";
-            vecNombres[4] = "Franco Colapinto";
-            vecNumeros[4] = "321654987";
-            //poner los nombres en la lista
-            while (vecNombres[indice] != null)
+            // si existe archivo, cargar los contactos desde el archivo
+            if (File.Exists("contactos.txt"))
             {
-                lstRegistro.Items.Add(vecNombres[indice] + " - " + vecNumeros[indice]);
-                indice++;
-                contador ++;
+                string[] lineas = File.ReadAllLines("contactos.txt");
+                for (int i = 0; i < lineas.Length && i < vecNombres.Length; i++)
+                {
+                    string[] partes = lineas[i].Split(',');
+                    if (partes.Length == 2)
+                    {
+                        vecNombres[i] = partes[0];
+                        vecNumeros[i] = partes[1];
+                        lstRegistro.Items.Add(vecNombres[i] + " - " + vecNumeros[i]);
+                        contador++;
+                        indice++;
+                    }
+                }
+            }
+            else
+            {
+                // si no hay archivo, cargar contactos de ejemplo
+                vecNombres[0] = "Max Verstappen";
+                vecNumeros[0] = "123456789";
+                vecNombres[1] = "Lewis Hamilton";
+                vecNumeros[1] = "987654321";
+                vecNombres[2] = "Lando Norris";
+                vecNumeros[2] = "456123789";
+                vecNombres[3] = "Fernando Alonso";
+                vecNumeros[3] = "789456123";
+                vecNombres[4] = "Franco Colapinto";
+                vecNumeros[4] = "321654987";
+                // poner los nombres en la lista
+                while (vecNombres[indice] != null)
+                {
+                    lstRegistro.Items.Add(vecNombres[indice] + " - " + vecNumeros[indice]);
+                    indice++;
+                    contador++;
+                }
+                // guardar ejemplos en el archivo
+                GuardarContactosEnArchivo();
             }
             lblCantidadContactos.Text = "Cantidad de contactos: " + contador;
-            //lblCantidadContactos.Text = "Cantidad de contactos: 0";
-            //lblFechaYHora.Text = "Ultimo registro: Ninguno";
+            // lblCantidadContactos.Text = "Cantidad de contactos: 0";
+            // lblFechaYHora.Text = "Ultimo registro: Ninguno";
             mskNumero.Enabled = false;
             btnAgendar.Enabled = false;
             txtNombre.Focus();
         }
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
-            //activar el maskedtextbox cuando el textbox tenga al menos 1 caracter
+            // activar el maskedtextbox cuando el textbox tenga al menos 1 caracter
             if (txtNombre.Text.Length > 0)
             {
                 mskNumero.Enabled = true;
@@ -52,7 +75,7 @@ namespace pyrLunaAgendaContactosGUI
         }
         private void mskNumero_TextChanged(object sender, EventArgs e)
         {
-            //activar el boton agendar cuando el maskedtextbox tenga minimo 1 numero
+            // activar el boton agendar cuando el maskedtextbox tenga minimo 1 numero
             if (mskNumero.Text.Length == 13)
             {
                 btnAgendar.Enabled = true;
@@ -73,7 +96,7 @@ namespace pyrLunaAgendaContactosGUI
             vecNumeros[indice] = mskNumero.Text;
             indice++;
             lstRegistro.Items.Add(txtNombre.Text + " - " + mskNumero.Text);
-            //cuando el vector este lleno , desactivar el boton agendar y mostrar un mensaje
+            // cuando el vector este lleno , desactivar el boton agendar y mostrar un mensaje
             if (indice == vecNombres.Length)
             {
                 txtNombre.Enabled = false;
@@ -83,6 +106,8 @@ namespace pyrLunaAgendaContactosGUI
             }
             lblCantidadContactos.Text = "Cantidad de contactos: " + lstRegistro.Items.Count;
             lblFechaYHora.Text = "Ultimo registro: " + DateTime.Now.ToString();
+            // guardar cambios en el archivo
+            GuardarContactosEnArchivo();
             txtNombre.Clear();
             mskNumero.Clear();
             txtNombre.Focus();
@@ -99,6 +124,8 @@ namespace pyrLunaAgendaContactosGUI
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            //activar controles si hay espacio despues de eliminar
+            txtNombre.Enabled = true;
             if (lstRegistro.SelectedIndex != -1)
             {
                 int indiceSeleccionado = lstRegistro.SelectedIndex;
@@ -126,10 +153,26 @@ namespace pyrLunaAgendaContactosGUI
                 {
                     lblFechaYHora.Text = "Último registro: Ninguno";
                 }
+                // guardar los cambios en el archivo después de eliminar
+                GuardarContactosEnArchivo();
             }
             else
             {
                 MessageBox.Show("Por favor, seleccione un contacto para eliminar.", "No se ha seleccionado contacto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        // guarda los vectores en el archivo de texto
+        private void GuardarContactosEnArchivo()
+        {
+            using (StreamWriter sw = new StreamWriter("contactos.txt"))
+            {
+                for (int i = 0; i < vecNombres.Length; i++)
+                {
+                    if (vecNombres[i] != null && vecNumeros[i] != null)
+                    {
+                        sw.WriteLine(vecNombres[i] + "," + vecNumeros[i]);
+                    }
+                }
             }
         }
     }
